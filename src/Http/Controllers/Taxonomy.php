@@ -36,7 +36,7 @@ class Taxonomy extends Controller
             return $response->withStatus(404);
         }
 
-        $resource = new Collection($record->getClassifications(), new ClassificationTransformer());
+        $resource = new Collection($record->getClassifications(), new ClassificationTransformer($record));
 
         $response->getBody()->write(json_encode(
             $this->manager->createData($resource)->toArray()
@@ -44,4 +44,15 @@ class Taxonomy extends Controller
 
         return $response;
     }
+
+    public function files(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
+    {
+        /** @var TaxonomyModel $record */
+        if (! $record = $this->entityManager->getRepository(TaxonomyModel::class)->find($args['taxonomy_id'])){
+            return $response->withStatus(404);
+        }
+
+        return $response;
+    }
+
 }

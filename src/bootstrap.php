@@ -32,6 +32,8 @@ $app->get('/environment/{environment_id}', '\TapestryCloud\Api\Http\Controllers\
 $app->get('/taxonomy/{taxonomy_id}', '\TapestryCloud\Api\Http\Controllers\Taxonomy::view');
 $app->get('/taxonomy/{taxonomy_id}/classifications', '\TapestryCloud\Api\Http\Controllers\Taxonomy::classifications');
 
+$app->get('/taxonomy/{taxonomy_id}/classification/{classification_id}/files', '\TapestryCloud\Api\Http\Controllers\Taxonomy::files');
+
 $app->get('/content-types', '\TapestryCloud\Api\Http\Controllers\ContentType::index');
 $app->get('/content-type/{content_type_id}', '\TapestryCloud\Api\Http\Controllers\ContentType::view');
 
