@@ -35,7 +35,7 @@ class ContentTypeTransformer extends TransformerAbstract
             ],
             'meta' => [
                 'taxonomy' => $model->getTaxonomy()->count(),
-                'files' => 0 //@todo right now the database plugin doesn't implement files on the content type, you have to dig down through taxonomy -> classification -> files to get them
+                'files' => $model->getFiles()->count()
             ]
         ];
     }
