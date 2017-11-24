@@ -2,6 +2,8 @@
 
 return [
 
+    'debug' => true, // this is so that doctrine generates proxy classes each request, needs fixing
+
     'site-dir' => __DIR__,
 
     'plugins' => [
