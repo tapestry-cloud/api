@@ -7,14 +7,24 @@ use League\Fractal\Resource\Item;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TapestryCloud\Api\Transformers\ContentTypeTransformer;
+use TapestryCloud\Api\Transformers\TaxonomyTransformer;
 
 class ContentType extends Controller
 {
+
+    /**
+     * /content-types
+     *
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return ResponseInterface
+     */
     public function index(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
     {
         $resource = new Collection(
             $this->entityManager->getRepository(\TapestryCloud\Database\Entities\ContentType::class)
-                ->findBy(['environment' => $args['environment_id']]),
+                ->findAll(),
             new ContentTypeTransformer()
         );
 
@@ -24,10 +34,18 @@ class ContentType extends Controller
         return $response;
     }
 
+    /**
+     * /content-type/{id}/
+     *
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return ResponseInterface|static
+     */
     public function view(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
     {
         /** @var \TapestryCloud\Database\Entities\ContentType $record */
-        if (!$record = $this->entityManager->getRepository(\TapestryCloud\Database\Entities\ContentType::class)->findOneBy(['name' => $args['content_type_id']])) {
+        if (!$record = $this->entityManager->getRepository(\TapestryCloud\Database\Entities\ContentType::class)->find($args['content_type_id'])) {
             return $response->withStatus(404);
         }
 
@@ -37,6 +55,29 @@ class ContentType extends Controller
             $this->manager->createData($resource)->toArray()
         ));
 
+        return $response;
+    }
+
+    /**
+     * /content-type/{id}/taxonomy
+     *
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return ResponseInterface
+     */
+    public function taxonomy (ServerRequestInterface $request, ResponseInterface $response, array $args = [])
+    {
+        /** @var \TapestryCloud\Database\Entities\ContentType $record */
+        if (!$record = $this->entityManager->getRepository(\TapestryCloud\Database\Entities\ContentType::class)->find($args['content_type_id'])) {
+            return $response->withStatus(404);
+        }
+
+        $resource = new Collection($record->getTaxonomy(), new TaxonomyTransformer());
+
+        $response->getBody()->write(json_encode(
+            $this->manager->createData($resource)->toArray()
+        ));
         return $response;
     }
 }

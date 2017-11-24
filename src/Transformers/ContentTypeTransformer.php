@@ -9,7 +9,7 @@ class ContentTypeTransformer extends TransformerAbstract
 {
     public function transform(ContentType $model) {
         return [
-            //'id' => $model->getId(),
+            'id' => $model->getId(),
             'name' => $model->getName(),
             'path' => $model->getPath(),
             'permalink' => $model->getPermalink(),
@@ -18,19 +18,19 @@ class ContentTypeTransformer extends TransformerAbstract
             'links' => [
                 [
                     'rel' => 'self',
-                    'uri' => '/content-type/' . $model->getName()
+                    'uri' => apiUri('/content-type/' . $model->getId()),
                 ],
-                [
-                    'rel' => 'environment',
-                    'uri' => '/environment/' . $model->getEnvironment()->getId()
-                ],
+                // [
+                //     'rel' => 'environment',
+                //     'uri' => '/environment/' . $model->getEnvironment()->getId(),
+                // ],
                 [
                     'rel' => 'taxonomy',
-                    'uri' => '/content-type/' . $model->getName() . '/taxonomy',
+                    'uri' => apiUri('/content-type/' . $model->getId() . '/taxonomy'),
                 ],
                 [
                     'rel' => 'files',
-                    'uri' => '/content-type/' . $model->getName() . '/files',
+                    'uri' => apiUri('/content-type/' . $model->getId() . '/files'),
                 ]
             ],
             'meta' => [
