@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4849b1e9629ad12c8b6ab9655d16afb4",
+    "content-hash": "a94f9c96edbdfffaac3133bc0a1a62de",
     "packages": [
         {
             "name": "composer/semver",
@@ -1693,16 +1693,16 @@
         },
         {
             "name": "tapestry-cloud/database-plugin",
-            "version": "0.5.1",
+            "version": "0.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tapestry-cloud/database-plugin.git",
-                "reference": "6e87308c0017dd59ccb5a704381d9678d36be07b"
+                "reference": "146969c0fd506e214bc5ff96f0ca493b9cfe95a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tapestry-cloud/database-plugin/zipball/6e87308c0017dd59ccb5a704381d9678d36be07b",
-                "reference": "6e87308c0017dd59ccb5a704381d9678d36be07b",
+                "url": "https://api.github.com/repos/tapestry-cloud/database-plugin/zipball/146969c0fd506e214bc5ff96f0ca493b9cfe95a3",
+                "reference": "146969c0fd506e214bc5ff96f0ca493b9cfe95a3",
                 "shasum": ""
             },
             "require": {
@@ -1711,8 +1711,8 @@
                 "php": ">=5.6.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "5.6.*",
-                "tapestry-cloud/tapestry": "dev-develop-1.0.11"
+                "phpunit/phpunit": "5.7.*",
+                "tapestry-cloud/tapestry": "^1"
             },
             "type": "library",
             "autoload": {
@@ -1731,7 +1731,7 @@
                 }
             ],
             "description": "Database plugin for Tapestry",
-            "time": "2017-11-23T01:29:10+00:00"
+            "time": "2017-11-24T13:19:02+00:00"
         },
         {
             "name": "tapestry-cloud/tapestry",
