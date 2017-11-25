@@ -1697,12 +1697,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tapestry-cloud/database-plugin.git",
-                "reference": "3bc20a771f3c92c3927fc6adb4e912b171e2d2ac"
+                "reference": "51021bed3d87e841e57df8c7b3b7ae9c5388dbb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tapestry-cloud/database-plugin/zipball/3bc20a771f3c92c3927fc6adb4e912b171e2d2ac",
-                "reference": "3bc20a771f3c92c3927fc6adb4e912b171e2d2ac",
+                "url": "https://api.github.com/repos/tapestry-cloud/database-plugin/zipball/51021bed3d87e841e57df8c7b3b7ae9c5388dbb2",
+                "reference": "51021bed3d87e841e57df8c7b3b7ae9c5388dbb2",
                 "shasum": ""
             },
             "require": {
@@ -1731,7 +1731,7 @@
                 }
             ],
             "description": "Database plugin for Tapestry",
-            "time": "2017-11-24T22:54:11+00:00"
+            "time": "2017-11-24T23:46:16+00:00"
         },
         {
             "name": "tapestry-cloud/tapestry",

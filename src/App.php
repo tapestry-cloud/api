@@ -45,7 +45,7 @@ class App
      */
     public function setContainer(ContainerInterface $container){
         $this->container = $container;
-        $this->container->share('app', $this);
+        $this->container->share(App::class, $this);
 
         $this->getContainer()->share('response', Response::class);
 
