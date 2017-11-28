@@ -25,7 +25,7 @@ class Configuration extends AbstractServiceProvider
     public function register()
     {
         $this->getContainer()->share(\Tapestry\Entities\Configuration::class, function () {
-            $configuration = new \Tapestry\Entities\Configuration(include __DIR__ . '/../../config.php');
+            $configuration = new \Tapestry\Entities\Configuration(include $this->getContainer()->get('config_path'));
             return $configuration;
         });
     }

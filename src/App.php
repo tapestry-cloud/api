@@ -28,7 +28,7 @@ class App
      */
     private $router;
 
-    public function __construct(EmitterInterface $emitter = null)
+    public function __construct($configPath = __DIR__ . '/../config.php', EmitterInterface $emitter = null)
     {
         $this->getContainer()->share('emitter', function() use ($emitter){
             if (is_null($emitter)){
@@ -36,6 +36,11 @@ class App
             }
             return $emitter;
         });
+
+        if (!$realConfigPath = realpath($configPath)){
+            throw new \Exception('No config file could be found at ['. $configPath .']');
+        }
+        $this->getContainer()->add('config_path', $realConfigPath);
     }
 
     /**
