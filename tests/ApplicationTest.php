@@ -37,7 +37,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 	public function testInstances()
 	{
 	    $emitter = $this->createMock(EmitterInterface::class);
-		$app = new App($emitter);
+		$app = new App(__DIR__ . '/mock_project/config.php', $emitter);
 		$this->assertTrue($app->getContainer() instanceof Container);
         $this->assertTrue($app->getRouter() instanceof RouteCollection);
         $this->assertTrue($app->getEmitter() instanceof Emitter);
@@ -48,7 +48,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $emitter = $this->createMock(EmitterInterface::class);
         $emitter->expects($this->once())->method('emit');
 
-        $app = new App($emitter);
+        $app = new App(__DIR__ . '/mock_project/config.php', $emitter);
         $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response){
             return $response;
         });
@@ -58,7 +58,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 	public function testRouteDispatch()
     {
         $emitter = new TestEmitter();
-        $app = new App($emitter);
+        $app = new App(__DIR__ . '/mock_project/config.php', $emitter);
 
         $invoked = false;
 

@@ -1,0 +1,1 @@
+{"data":{"id":2,"name":"blog","path":"_blog","permalink":"blog\/{year}\/{slug}.html","template":"blog","endabled":true,"links":[{"rel":"self","uri":"http:\/\/localhost:3000\/content-type\/2"},{"rel":"taxonomy","uri":"http:\/\/localhost:3000\/content-type\/2\/taxonomy"},{"rel":"files","uri":"http:\/\/localhost:3000\/content-type\/2\/files"}],"meta":{"taxonomy":2,"files":2}}}

@@ -167,6 +167,7 @@ class App
         $response = $this->dispatch($request);
         $this->emit('after.dispatch', $this->getContainer()->get('request'), $response);
         $this->container->get('emitter')->emit($response);
+        return $response;
     }
 
 }

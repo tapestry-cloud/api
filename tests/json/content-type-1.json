@@ -1,0 +1,1 @@
+{"data":{"id":1,"name":"default","path":"*","permalink":"*","template":"default","endabled":true,"links":[{"rel":"self","uri":"http:\/\/localhost:3000\/content-type\/1"},{"rel":"taxonomy","uri":"http:\/\/localhost:3000\/content-type\/1\/taxonomy"},{"rel":"files","uri":"http:\/\/localhost:3000\/content-type\/1\/files"}],"meta":{"taxonomy":0,"files":1}}}
