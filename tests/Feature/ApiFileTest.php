@@ -13,8 +13,13 @@ class ApiFileTest extends BootsApp
      */
     public function testFileIndex()
     {
-        $this->assertTrue(false);
-        // @todo
+        $response = $this->runRequest(ServerRequestFactory::fromGlobals([
+            'HTTP_HOST' => 'example.com',
+            'REQUEST_METHOD' => 'GET',
+            'REQUEST_URI' => '/files',
+        ], [], [], [], []));
+
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/files.json', $response);
     }
 
     /**
@@ -22,8 +27,13 @@ class ApiFileTest extends BootsApp
      */
 	public function testFileView()
     {
-        $this->assertTrue(false);
-        // @todo
+        $response = $this->runRequest(ServerRequestFactory::fromGlobals([
+            'HTTP_HOST' => 'example.com',
+            'REQUEST_METHOD' => 'GET',
+            'REQUEST_URI' => '/file/1',
+        ], [], [], [], []));
+
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/files.json', $response);
     }
 
     /**
@@ -31,7 +41,12 @@ class ApiFileTest extends BootsApp
      */
     public function testFileViewWithFrontMatter()
     {
-        $this->assertTrue(false);
-        // @todo
+        $response = $this->runRequest(ServerRequestFactory::fromGlobals([
+            'HTTP_HOST' => 'example.com',
+            'REQUEST_METHOD' => 'GET',
+            'REQUEST_URI' => '/file/1?include=frontmatter',
+        ], [], [], [], []));
+
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/files.json', $response);
     }
 }

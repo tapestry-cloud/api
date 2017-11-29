@@ -41,15 +41,22 @@ class Routes extends AbstractServiceProvider implements BootableServiceProviderI
             return $response;
         });
 
-        // Remove environment stuff...
-        $app->get('/environments', '\TapestryCloud\Api\Http\Controllers\Environment::index');
-        $app->get('/environment/{environment_id}', '\TapestryCloud\Api\Http\Controllers\Environment::view');
+        //
+        // Files
+        //
+        $app->get('/files', '\TapestryCloud\Api\Http\Controllers\File::index');
+        $app->get('/file/{file_id}', '\TapestryCloud\Api\Http\Controllers\File::view');
 
+        //
+        // Taxonomy
+        //
         $app->get('/taxonomy/{taxonomy_id}', '\TapestryCloud\Api\Http\Controllers\Taxonomy::view');
         $app->get('/taxonomy/{taxonomy_id}/classifications', '\TapestryCloud\Api\Http\Controllers\Taxonomy::classifications');
-
         $app->get('/taxonomy/{taxonomy_id}/classification/{classification_id}/files', '\TapestryCloud\Api\Http\Controllers\Taxonomy::files');
 
+        //
+        // Content Types
+        //
         $app->get('/content-types', '\TapestryCloud\Api\Http\Controllers\ContentType::index');
         $app->get('/content-type/{content_type_id}', '\TapestryCloud\Api\Http\Controllers\ContentType::view');
 
