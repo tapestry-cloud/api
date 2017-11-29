@@ -5,23 +5,8 @@ namespace TapestryCloud\Api\Tests\Feature;
 use TapestryCloud\Api\Tests\BootsApp;
 use Zend\Diactoros\ServerRequestFactory;
 
-class ApiTest extends BootsApp
+class ApiContentTypeTest extends BootsApp
 {
-
-    /**
-     * Test route: /
-     */
-	public function testIndex()
-    {
-        $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
-            'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/',
-        ], [], [], [], []));
-
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/index.json', $response);
-    }
-
     /**
      * Test route: /content-types
      */
@@ -37,7 +22,7 @@ class ApiTest extends BootsApp
     }
 
     /**
-     * Test route: /content-types
+     * Test route: /content-type/{id}
      */
     public function testContentTypeView()
     {
@@ -59,4 +44,32 @@ class ApiTest extends BootsApp
 
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/content-type-2.json', $response);
     }
+
+    /**
+     * Test route: /content-type/{id}/taxonomy
+     */
+    public function testContentTypeTaxonomy()
+    {
+        $this->assertTrue(false);
+        // @todo
+    }
+
+    /**
+     * Test route: /content-type/{id}/files
+     */
+    public function testContentTypeFiles()
+    {
+        $this->assertTrue(false);
+        // @todo
+    }
+
+    /**
+     * Test route: /content-type/{id}/files?include=frontmatter
+     */
+    public function testContentTypeFilesWithFrontMatter()
+    {
+        $this->assertTrue(false);
+        // @todo
+    }
+
 }
