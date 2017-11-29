@@ -6,19 +6,17 @@ use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TapestryCloud\Api\Transformers\ContentTypeTransformer;
 use TapestryCloud\Api\Transformers\FileTransformer;
-use TapestryCloud\Api\Transformers\TaxonomyTransformer;
 
 class File extends Controller
 {
-
     /**
-     * /files
+     * /files.
      *
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     * @param array $args
+     * @param ResponseInterface      $response
+     * @param array                  $args
+     *
      * @return ResponseInterface
      */
     public function index(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
@@ -35,15 +33,17 @@ class File extends Controller
         $response->getBody()->write(json_encode(
             $this->manager->createData($resource)->toArray()
         ));
+
         return $response;
     }
 
     /**
-     * /file/{id}/
+     * /file/{id}/.
      *
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     * @param array $args
+     * @param ResponseInterface      $response
+     * @param array                  $args
+     *
      * @return ResponseInterface|static
      */
     public function view(ServerRequestInterface $request, ResponseInterface $response, array $args = [])

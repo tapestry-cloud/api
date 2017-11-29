@@ -7,18 +7,19 @@ use TapestryCloud\Database\Entities\ContentType;
 
 class ContentTypeTransformer extends TransformerAbstract
 {
-    public function transform(ContentType $model) {
+    public function transform(ContentType $model)
+    {
         return [
-            'id' => $model->getId(),
-            'name' => $model->getName(),
-            'path' => $model->getPath(),
+            'id'        => $model->getId(),
+            'name'      => $model->getName(),
+            'path'      => $model->getPath(),
             'permalink' => $model->getPermalink(),
-            'template' => $model->getTemplate(),
-            'endabled' => $model->getEnabled(),
-            'links' => [
+            'template'  => $model->getTemplate(),
+            'endabled'  => $model->getEnabled(),
+            'links'     => [
                 [
                     'rel' => 'self',
-                    'uri' => apiUri('/content-type/' . $model->getId()),
+                    'uri' => apiUri('/content-type/'.$model->getId()),
                 ],
                 // [
                 //     'rel' => 'environment',
@@ -26,18 +27,17 @@ class ContentTypeTransformer extends TransformerAbstract
                 // ],
                 [
                     'rel' => 'taxonomy',
-                    'uri' => apiUri('/content-type/' . $model->getId() . '/taxonomy'),
+                    'uri' => apiUri('/content-type/'.$model->getId().'/taxonomy'),
                 ],
                 [
                     'rel' => 'files',
-                    'uri' => apiUri('/content-type/' . $model->getId() . '/files'),
-                ]
+                    'uri' => apiUri('/content-type/'.$model->getId().'/files'),
+                ],
             ],
             'meta' => [
                 'taxonomy' => $model->getTaxonomy()->count(),
-                'files' => $model->getFiles()->count()
-            ]
+                'files'    => $model->getFiles()->count(),
+            ],
         ];
     }
-
 }

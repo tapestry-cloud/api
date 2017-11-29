@@ -5,8 +5,6 @@ namespace TapestryCloud\Api;
 use League\Container\Container;
 use League\Container\ContainerInterface;
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use League\Container\ServiceProvider\BootableServiceProviderInterface;
-use League\Container\ServiceProvider\ServiceProviderInterface;
 use League\Event\EmitterTrait;
 use League\Route\RouteCollection;
 use Zend\Diactoros\Response;
@@ -17,7 +15,6 @@ use Zend\Diactoros\ServerRequestFactory;
 
 class App
 {
-
     use EmitterTrait;
 
     /**
@@ -30,17 +27,18 @@ class App
      */
     private $router;
 
-    public function __construct($configPath = __DIR__ . '/../config.php', EmitterInterface $emitter = null)
+    public function __construct($configPath = __DIR__.'/../config.php', EmitterInterface $emitter = null)
     {
-        $this->getContainer()->share('emitter', function() use ($emitter){
-            if (is_null($emitter)){
+        $this->getContainer()->share('emitter', function () use ($emitter) {
+            if (is_null($emitter)) {
                 $emitter = new SapiEmitter();
             }
+
             return $emitter;
         });
 
-        if (!$realConfigPath = realpath($configPath)){
-            throw new \Exception('No config file could be found at ['. $configPath .']');
+        if (!$realConfigPath = realpath($configPath)) {
+            throw new \Exception('No config file could be found at ['.$configPath.']');
         }
         $this->getContainer()->add('config_path', $realConfigPath);
     }
@@ -50,9 +48,10 @@ class App
      *
      * @param ContainerInterface $container
      */
-    public function setContainer(ContainerInterface $container){
+    public function setContainer(ContainerInterface $container)
+    {
         $this->container = $container;
-        $this->container->share(App::class, $this);
+        $this->container->share(self::class, $this);
 
         $this->getContainer()->share('response', Response::class);
 
@@ -66,12 +65,13 @@ class App
      */
     public function getContainer()
     {
-        if (is_null($this->container)){
+        if (is_null($this->container)) {
             $this->setContainer(new Container());
             $this->container->delegate(
-                new \League\Container\ReflectionContainer
+                new \League\Container\ReflectionContainer()
             );
         }
+
         return $this->container;
     }
 
@@ -85,6 +85,7 @@ class App
         if (!isset($this->router)) {
             $this->router = new RouteCollection($this->getContainer());
         }
+
         return $this->router;
     }
 
@@ -93,7 +94,8 @@ class App
      *
      * @param AbstractServiceProvider $serviceProvider
      */
-    public function register(AbstractServiceProvider $serviceProvider) {
+    public function register(AbstractServiceProvider $serviceProvider)
+    {
         $this->getContainer()->addServiceProvider($serviceProvider);
     }
 
@@ -116,7 +118,7 @@ class App
      */
     public function post($route, $action)
     {
-        $this->getRouter()->map('POST', $route,$action);
+        $this->getRouter()->map('POST', $route, $action);
     }
 
     /**
@@ -127,7 +129,7 @@ class App
      */
     public function put($route, $action)
     {
-        $this->getRouter()->map('PUT', $route,$action);
+        $this->getRouter()->map('PUT', $route, $action);
     }
 
     /**
@@ -138,7 +140,7 @@ class App
      */
     public function delete($route, $action)
     {
-        $this->getRouter()->map('DELETE', $route,$action);
+        $this->getRouter()->map('DELETE', $route, $action);
     }
 
     /**
@@ -149,18 +151,20 @@ class App
      */
     public function patch($route, $action)
     {
-        $this->getRouter()->map('PATCH', $route,$action);
+        $this->getRouter()->map('PATCH', $route, $action);
     }
 
     public function dispatch(ServerRequest $request = null)
     {
-        $this->getContainer()->share('request', function() use ($request){
-            if (is_null($request)){
+        $this->getContainer()->share('request', function () use ($request) {
+            if (is_null($request)) {
                 $request = ServerRequestFactory::fromGlobals($_SERVER, $_GET, $_POST, $_COOKIE, $_FILES);
             }
+
             return $request;
         });
         $this->emit('before.dispatch', $this->getContainer()->get('request'));
+
         return $this->getRouter()->dispatch($this->getContainer()->get('request'), $this->getContainer()->get('response'));
     }
 
@@ -169,7 +173,7 @@ class App
         $response = $this->dispatch($request);
         $this->emit('after.dispatch', $this->getContainer()->get('request'), $response);
         $this->container->get('emitter')->emit($response);
+
         return $response;
     }
-
 }

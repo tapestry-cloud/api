@@ -16,6 +16,7 @@ class ClassificationTransformer extends TransformerAbstract
 
     /**
      * ClassificationTransformer constructor.
+     *
      * @param Taxonomy|null $taxonomy
      */
     public function __construct(Taxonomy $taxonomy = null)
@@ -23,26 +24,26 @@ class ClassificationTransformer extends TransformerAbstract
         $this->taxonomy = $taxonomy;
     }
 
-    public function transform(Classification $model) {
-
+    public function transform(Classification $model)
+    {
         if (is_null($this->taxonomy)) {
-            $filesUri = '/classification/' . $model->getId() . '/files';
+            $filesUri = '/classification/'.$model->getId().'/files';
             $fileCount = $model->getFiles()->count();
         } else {
-            $filesUri = '/taxonomy/'. $this->taxonomy->getId() .'/classification/'. $model->getId() .'/files';
+            $filesUri = '/taxonomy/'.$this->taxonomy->getId().'/classification/'.$model->getId().'/files';
             // @todo do the below with an EntityRepository and proxy method see: https://stackoverflow.com/questions/23564897/filtering-on-many-to-many-association-with-doctrine2
-            $fileCount = $model->getFiles()->filter(function(File $file){
-                return($file->getContentType() === $this->taxonomy->getContentType());
+            $fileCount = $model->getFiles()->filter(function (File $file) {
+                return $file->getContentType() === $this->taxonomy->getContentType();
             })->count();
         }
 
         return [
-            'id' => $model->getId(),
-            'name' => $model->getName(),
+            'id'    => $model->getId(),
+            'name'  => $model->getName(),
             'links' => [
                 [
                     'rel' => 'self',
-                    'uri' => apiUri('/classification/' . $model->getId()),
+                    'uri' => apiUri('/classification/'.$model->getId()),
                 ],
                 [
                     'rel' => 'siblings',
@@ -54,13 +55,12 @@ class ClassificationTransformer extends TransformerAbstract
                 ],
                 [
                     'rel' => 'taxonomy',
-                    'uri' => apiUri('/classification/' . $model->getId() . '/taxonomy'),
+                    'uri' => apiUri('/classification/'.$model->getId().'/taxonomy'),
                 ],
             ],
             'meta' => [
                 'files' => $fileCount,
-            ]
+            ],
         ];
     }
-
 }

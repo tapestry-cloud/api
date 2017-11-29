@@ -7,32 +7,32 @@ use TapestryCloud\Database\Entities\Taxonomy;
 
 class TaxonomyTransformer extends TransformerAbstract
 {
-    public function transform(Taxonomy $model) {
+    public function transform(Taxonomy $model)
+    {
         return [
-            'id' => $model->getId(),
-            'name' => $model->getName(),
+            'id'    => $model->getId(),
+            'name'  => $model->getName(),
             'links' => [
                 [
                     'rel' => 'self',
-                    'uri' => apiUri('/taxonomy/' . $model->getId())
+                    'uri' => apiUri('/taxonomy/'.$model->getId()),
                 ],
                 [
                     'rel' => 'siblings',
-                    'uri' => apiUri('/content-type/' . $model->getContentType()->getId() . '/taxonomy')
+                    'uri' => apiUri('/content-type/'.$model->getContentType()->getId().'/taxonomy'),
                 ],
                 [
                     'rel' => 'content-type',
-                    'uri' => apiUri('/content-type/' . $model->getContentType()->getId()),
+                    'uri' => apiUri('/content-type/'.$model->getContentType()->getId()),
                 ],
                 [
                     'rel' => 'classification',
-                    'uri' => apiUri('/taxonomy/' . $model->getId() . '/classifications'),
-                ]
+                    'uri' => apiUri('/taxonomy/'.$model->getId().'/classifications'),
+                ],
             ],
             'meta' => [
                 'classification' => $model->getClassifications()->count(),
-            ]
+            ],
         ];
     }
-
 }

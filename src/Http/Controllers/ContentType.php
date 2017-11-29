@@ -12,13 +12,13 @@ use TapestryCloud\Api\Transformers\TaxonomyTransformer;
 
 class ContentType extends Controller
 {
-
     /**
-     * /content-types
+     * /content-types.
      *
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     * @param array $args
+     * @param ResponseInterface      $response
+     * @param array                  $args
+     *
      * @return ResponseInterface
      */
     public function index(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
@@ -32,15 +32,17 @@ class ContentType extends Controller
         $response->getBody()->write(json_encode(
             $this->manager->createData($resource)->toArray()
         ));
+
         return $response;
     }
 
     /**
-     * /content-type/{id}/
+     * /content-type/{id}/.
      *
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     * @param array $args
+     * @param ResponseInterface      $response
+     * @param array                  $args
+     *
      * @return ResponseInterface|static
      */
     public function view(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
@@ -60,14 +62,15 @@ class ContentType extends Controller
     }
 
     /**
-     * /content-type/{id}/taxonomy
+     * /content-type/{id}/taxonomy.
      *
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     * @param array $args
+     * @param ResponseInterface      $response
+     * @param array                  $args
+     *
      * @return ResponseInterface
      */
-    public function taxonomy (ServerRequestInterface $request, ResponseInterface $response, array $args = [])
+    public function taxonomy(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
     {
         /** @var \TapestryCloud\Database\Entities\ContentType $record */
         if (!$record = $this->entityManager->getRepository(\TapestryCloud\Database\Entities\ContentType::class)->find($args['content_type_id'])) {
@@ -79,18 +82,20 @@ class ContentType extends Controller
         $response->getBody()->write(json_encode(
             $this->manager->createData($resource)->toArray()
         ));
+
         return $response;
     }
 
     /**
-     * /content-type/{id}/files
+     * /content-type/{id}/files.
      *
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     * @param array $args
+     * @param ResponseInterface      $response
+     * @param array                  $args
+     *
      * @return ResponseInterface
      */
-    public function files (ServerRequestInterface $request, ResponseInterface $response, array $args = [])
+    public function files(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
     {
         /** @var \TapestryCloud\Database\Entities\ContentType $record */
         if (!$record = $this->entityManager->getRepository(\TapestryCloud\Database\Entities\ContentType::class)->find($args['content_type_id'])) {
@@ -107,15 +112,16 @@ class ContentType extends Controller
                 'links' => [
                     [
                         'rel' => 'self',
-                        'uri' => apiUri('/content-type/' . $record->getId() . '/files')
+                        'uri' => apiUri('/content-type/'.$record->getId().'/files'),
                     ],
                     [
                         'rel' => 'withFrontmatter',
-                        'uri' => apiUri('/content-type/' . $record->getId() . '/files?include=frontmatter')
-                    ]
-                ]
-            ],$this->manager->createData($resource)->toArray())
+                        'uri' => apiUri('/content-type/'.$record->getId().'/files?include=frontmatter'),
+                    ],
+                ],
+            ], $this->manager->createData($resource)->toArray())
         ));
+
         return $response;
     }
 }

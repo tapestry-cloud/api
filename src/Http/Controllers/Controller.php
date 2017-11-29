@@ -27,7 +27,7 @@ class Controller
      * ContentType constructor.
      *
      * @param EntityManagerInterface $entityManager
-     * @param App $app
+     * @param App                    $app
      */
     public function __construct(EntityManagerInterface $entityManager, App $app)
     {

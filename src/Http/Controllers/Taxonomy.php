@@ -10,18 +10,19 @@ use Psr\Http\Message\ServerRequestInterface;
 use TapestryCloud\Api\Transformers\ClassificationTransformer;
 use TapestryCloud\Api\Transformers\FileTransformer;
 use TapestryCloud\Api\Transformers\TaxonomyTransformer;
-use TapestryCloud\Database\Entities\Taxonomy as TaxonomyModel;
 use TapestryCloud\Database\Entities\Classification as ClassificationModel;
+use TapestryCloud\Database\Entities\Taxonomy as TaxonomyModel;
 use TapestryCloud\Database\Repositories\ClassificationRepository;
 
 class Taxonomy extends Controller
 {
     /**
-     * /taxonomy
+     * /taxonomy.
      *
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     * @param array $args
+     * @param ResponseInterface      $response
+     * @param array                  $args
+     *
      * @return ResponseInterface
      */
     public function index(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
@@ -35,13 +36,14 @@ class Taxonomy extends Controller
         $response->getBody()->write(json_encode(
             $this->manager->createData($resource)->toArray()
         ));
+
         return $response;
     }
 
     public function view(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
     {
         /** @var TaxonomyModel $record */
-        if (! $record = $this->entityManager->getRepository(TaxonomyModel::class)->find($args['taxonomy_id'])){
+        if (!$record = $this->entityManager->getRepository(TaxonomyModel::class)->find($args['taxonomy_id'])) {
             return $response->withStatus(404);
         }
 
@@ -57,7 +59,7 @@ class Taxonomy extends Controller
     public function classifications(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
     {
         /** @var TaxonomyModel $record */
-        if (! $record = $this->entityManager->getRepository(TaxonomyModel::class)->find($args['taxonomy_id'])){
+        if (!$record = $this->entityManager->getRepository(TaxonomyModel::class)->find($args['taxonomy_id'])) {
             return $response->withStatus(404);
         }
 
@@ -73,14 +75,14 @@ class Taxonomy extends Controller
     public function files(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
     {
         /** @var TaxonomyModel $taxonomy */
-        if (! $taxonomy = $this->entityManager->getRepository(TaxonomyModel::class)->find($args['taxonomy_id'])){
+        if (!$taxonomy = $this->entityManager->getRepository(TaxonomyModel::class)->find($args['taxonomy_id'])) {
             return $response->withStatus(404);
         }
 
         /** @var EntityRepository|ClassificationRepository $repo */
         $repo = $this->entityManager->getRepository(ClassificationModel::class);
 
-        if (! $files = $repo->findFilesByContentType($taxonomy->getContentType()->getId(), $args['classification_id'])){
+        if (!$files = $repo->findFilesByContentType($taxonomy->getContentType()->getId(), $args['classification_id'])) {
             return $response->withStatus(404);
         }
 
@@ -94,5 +96,4 @@ class Taxonomy extends Controller
 
         return $response;
     }
-
 }

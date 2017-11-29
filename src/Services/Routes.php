@@ -8,7 +8,6 @@ use TapestryCloud\Api\App;
 
 class Routes extends AbstractServiceProvider implements BootableServiceProviderInterface
 {
-
     /**
      * Use the register method to register items with the container via the
      * protected $this->container property or the `getContainer` method
@@ -25,21 +24,23 @@ class Routes extends AbstractServiceProvider implements BootableServiceProviderI
      * Method will be invoked on registration of a service provider implementing
      * this interface. Provides ability for eager loading of Service Providers.
      *
-     * @return void
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
+     *
+     * @return void
      */
     public function boot()
     {
         /** @var App $app */
         $app = $this->getContainer()->get(App::class);
 
-        $app->getRouter()->setStrategy(new \League\Route\Strategy\JsonStrategy);
+        $app->getRouter()->setStrategy(new \League\Route\Strategy\JsonStrategy());
 
-        $app->get('/', function(\Psr\Http\Message\RequestInterface $request, \Psr\Http\Message\ResponseInterface $response){
+        $app->get('/', function (\Psr\Http\Message\RequestInterface $request, \Psr\Http\Message\ResponseInterface $response) {
             $response->getBody()->write(json_encode([
-                'message' => 'Tapestry API'
+                'message' => 'Tapestry API',
             ]));
+
             return $response;
         });
 

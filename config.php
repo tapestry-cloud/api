@@ -9,8 +9,8 @@ return [
     'plugins' => [
         'database' => [
             'driver' => 'pdo_sqlite',
-            'path' => __DIR__ . DIRECTORY_SEPARATOR . 'db.sqlite'
-        ]
-    ]
+            'path'   => __DIR__.DIRECTORY_SEPARATOR.'db.sqlite',
+        ],
+    ],
 
 ];

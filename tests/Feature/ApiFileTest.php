@@ -7,102 +7,101 @@ use Zend\Diactoros\ServerRequestFactory;
 
 class ApiFileTest extends BootsApp
 {
-
     /**
-     * Test route: /files
+     * Test route: /files.
      */
     public function testFileIndex()
     {
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/files',
+            'REQUEST_URI'    => '/files',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/files.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/files.json', $response);
     }
 
     /**
-     * Test route: /file/{id}
+     * Test route: /file/{id}.
      */
-	public function testFileView()
+    public function testFileView()
     {
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/file/1',
+            'REQUEST_URI'    => '/file/1',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-1.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/file-1.json', $response);
 
         $this->bootApp();
 
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/file/2',
+            'REQUEST_URI'    => '/file/2',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-2.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/file-2.json', $response);
 
         $this->bootApp();
 
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/file/3',
+            'REQUEST_URI'    => '/file/3',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-3.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/file-3.json', $response);
     }
 
     /**
-     * Test route: /file/{id}?include=frontmatter
+     * Test route: /file/{id}?include=frontmatter.
      */
     public function testFileViewWithFrontMatter()
     {
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/file/1',
-            'QUERY_STRING' => '?include=frontmatter',
+            'REQUEST_URI'    => '/file/1',
+            'QUERY_STRING'   => '?include=frontmatter',
         ], [
-            'include' => 'frontmatter'
+            'include' => 'frontmatter',
         ], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-1-include-frontmatter.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/file-1-include-frontmatter.json', $response);
 
         $this->bootApp();
 
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/file/2',
-            'QUERY_STRING' => '?include=frontmatter',
+            'REQUEST_URI'    => '/file/2',
+            'QUERY_STRING'   => '?include=frontmatter',
         ], [
-            'include' => 'frontmatter'
+            'include' => 'frontmatter',
         ], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-2-include-frontmatter.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/file-2-include-frontmatter.json', $response);
 
         $this->bootApp();
 
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/file/3',
-            'QUERY_STRING' => '?include=frontmatter',
+            'REQUEST_URI'    => '/file/3',
+            'QUERY_STRING'   => '?include=frontmatter',
         ], [
-            'include' => 'frontmatter'
+            'include' => 'frontmatter',
         ], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-3-include-frontmatter.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/file-3-include-frontmatter.json', $response);
     }
 }

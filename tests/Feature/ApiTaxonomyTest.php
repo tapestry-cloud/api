@@ -8,70 +8,70 @@ use Zend\Diactoros\ServerRequestFactory;
 class ApiTaxonomyTest extends BootsApp
 {
     /**
-     * Test route: /taxonomy
+     * Test route: /taxonomy.
      */
     public function testTaxonomyIndex()
     {
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/taxonomy',
+            'REQUEST_URI'    => '/taxonomy',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/taxonomy.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/taxonomy.json', $response);
     }
 
     /**
-     * Test route: /taxonomy/{id}
+     * Test route: /taxonomy/{id}.
      */
-	public function testTaxonomyView()
+    public function testTaxonomyView()
     {
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/taxonomy/1',
+            'REQUEST_URI'    => '/taxonomy/1',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/taxonomy-1.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/taxonomy-1.json', $response);
 
         $this->bootApp();
 
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/taxonomy/2',
+            'REQUEST_URI'    => '/taxonomy/2',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/taxonomy-2.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/taxonomy-2.json', $response);
     }
 
     /**
-     * Test route: /taxonomy/{id}/classifications
+     * Test route: /taxonomy/{id}/classifications.
      */
     public function testTaxonomyClassifications()
     {
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/taxonomy/1/classifications',
+            'REQUEST_URI'    => '/taxonomy/1/classifications',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/taxonomy-1-classifications.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/taxonomy-1-classifications.json', $response);
 
         $this->bootApp();
 
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/taxonomy/2/classifications',
+            'REQUEST_URI'    => '/taxonomy/2/classifications',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/taxonomy-2-classifications.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/taxonomy-2-classifications.json', $response);
     }
 
     /**
@@ -83,45 +83,45 @@ class ApiTaxonomyTest extends BootsApp
     public function testTaxonomyClassificationFiles()
     {
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/taxonomy/1/classification/1/files',
+            'REQUEST_URI'    => '/taxonomy/1/classification/1/files',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/taxonomy-1-classification-1-files.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/taxonomy-1-classification-1-files.json', $response);
 
         $this->bootApp();
 
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/taxonomy/1/classification/2/files',
+            'REQUEST_URI'    => '/taxonomy/1/classification/2/files',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/taxonomy-1-classification-2-files.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/taxonomy-1-classification-2-files.json', $response);
 
         $this->bootApp();
 
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/taxonomy/1/classification/3/files',
+            'REQUEST_URI'    => '/taxonomy/1/classification/3/files',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/taxonomy-1-classification-3-files.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/taxonomy-1-classification-3-files.json', $response);
 
         $this->bootApp();
 
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/taxonomy/1/classification/4/files',
+            'REQUEST_URI'    => '/taxonomy/1/classification/4/files',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/taxonomy-1-classification-4-files.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/taxonomy-1-classification-4-files.json', $response);
     }
 }
