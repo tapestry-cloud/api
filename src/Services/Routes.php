@@ -4,9 +4,6 @@ namespace TapestryCloud\Api\Services;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Container\ServiceProvider\BootableServiceProviderInterface;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\BufferedOutput;
-use Tapestry\Console\DefaultInputDefinition;
 use TapestryCloud\Api\App;
 
 class Routes extends AbstractServiceProvider implements BootableServiceProviderInterface

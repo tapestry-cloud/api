@@ -12,17 +12,7 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\EmitterInterface;
 use Zend\Diactoros\ServerRequestFactory;
 
-/**
- * Have headers been sent?
- *
- * @return false
- */
-function headers_sent()
-{
-    return false;
-}
-
-class ApplicationTest extends \PHPUnit_Framework_TestCase
+class ApplicationClassTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $response;
@@ -34,31 +24,31 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->response = $this->createMock(ResponseInterface::class);
     }
 
-	public function testInstances()
-	{
-	    $emitter = $this->createMock(EmitterInterface::class);
-		$app = new App(__DIR__ . '/mock_project/config.php', $emitter);
-		$this->assertTrue($app->getContainer() instanceof Container);
+    public function testInstances()
+    {
+        $emitter = $this->createMock(EmitterInterface::class);
+        $app = new App(__DIR__ . '/../mock_project/config.php', $emitter);
+        $this->assertTrue($app->getContainer() instanceof Container);
         $this->assertTrue($app->getRouter() instanceof RouteCollection);
         $this->assertTrue($app->getEmitter() instanceof Emitter);
-	}
+    }
 
-	public function testAppEmitsOnRun()
+    public function testAppEmitsOnRun()
     {
         $emitter = $this->createMock(EmitterInterface::class);
         $emitter->expects($this->once())->method('emit');
 
-        $app = new App(__DIR__ . '/mock_project/config.php', $emitter);
+        $app = new App(__DIR__ . '/../mock_project/config.php', $emitter);
         $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response){
             return $response;
         });
         $app->run();
     }
 
-	public function testRouteDispatch()
+    public function testRouteDispatch()
     {
         $emitter = new TestEmitter();
-        $app = new App(__DIR__ . '/mock_project/config.php', $emitter);
+        $app = new App(__DIR__ . '/../mock_project/config.php', $emitter);
 
         $invoked = false;
 

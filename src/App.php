@@ -4,6 +4,8 @@ namespace TapestryCloud\Api;
 
 use League\Container\Container;
 use League\Container\ContainerInterface;
+use League\Container\ServiceProvider\AbstractServiceProvider;
+use League\Container\ServiceProvider\BootableServiceProviderInterface;
 use League\Container\ServiceProvider\ServiceProviderInterface;
 use League\Event\EmitterTrait;
 use League\Route\RouteCollection;
@@ -89,9 +91,9 @@ class App
     /**
      * Register a new service provider with the container.
      *
-     * @param ServiceProviderInterface $serviceProvider
+     * @param AbstractServiceProvider $serviceProvider
      */
-    public function register(ServiceProviderInterface $serviceProvider) {
+    public function register(AbstractServiceProvider $serviceProvider) {
         $this->getContainer()->addServiceProvider($serviceProvider);
     }
 

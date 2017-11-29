@@ -1,10 +1,9 @@
 <?php
 
-namespace TapestryCloud\Api\Tests;
+namespace TapestryCloud\Api\Tests\Feature;
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use TapestryCloud\Api\App;
+use TapestryCloud\Api\Tests\TestEmitter;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\ServerRequestFactory;
 
@@ -25,7 +24,7 @@ class ApiTest extends \PHPUnit_Framework_TestCase
     protected function bootApp()
     {
         $this->emitter = new TestEmitter();
-        $this->app = new App(__DIR__ . '/mock_project/config.php', $this->emitter);
+        $this->app = new App(__DIR__ . '/../mock_project/config.php', $this->emitter);
 
         $this->app->register(new \TapestryCloud\Api\Services\Routes);
         $this->app->register(new \TapestryCloud\Api\Services\Configuration);
@@ -50,7 +49,7 @@ class ApiTest extends \PHPUnit_Framework_TestCase
             'REQUEST_URI' => '/',
         ], [], [], [], []));
 
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/json/index.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/index.json', $response);
     }
 
     /**
@@ -64,7 +63,7 @@ class ApiTest extends \PHPUnit_Framework_TestCase
             'REQUEST_URI' => '/content-types',
         ], [], [], [], []));
 
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/json/content-types.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/content-types.json', $response);
     }
 
     /**
@@ -78,7 +77,7 @@ class ApiTest extends \PHPUnit_Framework_TestCase
             'REQUEST_URI' => '/content-type/1',
         ], [], [], [], []));
 
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/json/content-type-1.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/content-type-1.json', $response);
 
         $this->bootApp();
 
@@ -88,6 +87,6 @@ class ApiTest extends \PHPUnit_Framework_TestCase
             'REQUEST_URI' => '/content-type/2',
         ], [], [], [], []));
 
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/json/content-type-2.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/content-type-2.json', $response);
     }
 }
