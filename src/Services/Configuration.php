@@ -3,16 +3,12 @@
 namespace TapestryCloud\Api\Services;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\BufferedOutput;
-use Tapestry\Console\DefaultInputDefinition;
 
 class Configuration extends AbstractServiceProvider
 {
-
     /** @var array */
     protected $provides = [
-        \Tapestry\Entities\Configuration::class
+        \Tapestry\Entities\Configuration::class,
     ];
 
     /**
@@ -26,6 +22,7 @@ class Configuration extends AbstractServiceProvider
     {
         $this->getContainer()->share(\Tapestry\Entities\Configuration::class, function () {
             $configuration = new \Tapestry\Entities\Configuration(include $this->getContainer()->get('config_path'));
+
             return $configuration;
         });
     }

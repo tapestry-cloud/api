@@ -7,19 +7,18 @@ use Zend\Diactoros\ServerRequestFactory;
 
 class ApiIndexTest extends BootsApp
 {
-
     /**
-     * Test route: /
+     * Test route: /.
      */
-	public function testIndex()
+    public function testIndex()
     {
         $response = $this->runRequest(ServerRequestFactory::fromGlobals([
-            'HTTP_HOST' => 'example.com',
+            'HTTP_HOST'      => 'example.com',
             'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => '/',
+            'REQUEST_URI'    => '/',
         ], [], [], [], []));
 
         $this->assertResponseOk();
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/index.json', $response);
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/../json/index.json', $response);
     }
 }

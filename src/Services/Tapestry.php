@@ -10,11 +10,10 @@ use Tapestry\Entities\Project;
 
 class Tapestry extends AbstractServiceProvider
 {
-
     /** @var array */
     protected $provides = [
         \Tapestry\Tapestry::class,
-        Project::class
+        Project::class,
     ];
 
     /**
@@ -26,8 +25,9 @@ class Tapestry extends AbstractServiceProvider
      */
     public function register()
     {
-        $this->getContainer()->add(Project::class, function(){
+        $this->getContainer()->add(Project::class, function () {
             $tapestry = $this->getContainer()->get(\Tapestry\Tapestry::class);
+
             return $tapestry->getContainer()->get(Project::class);
         });
 
@@ -35,7 +35,7 @@ class Tapestry extends AbstractServiceProvider
             $definitions = new DefaultInputDefinition();
             $tapestry = new \Tapestry\Tapestry(new ArrayInput([
                 '--site-dir' => __DIR__, //@todo fix this
-                '--env' => 'testing'
+                '--env'      => 'testing',
             ], $definitions));
 
             $tapestry->setOutput(new BufferedOutput());
