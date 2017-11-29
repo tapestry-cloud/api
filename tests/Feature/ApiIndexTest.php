@@ -19,6 +19,7 @@ class ApiIndexTest extends BootsApp
             'REQUEST_URI' => '/',
         ], [], [], [], []));
 
+        $this->assertResponseOk();
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/index.json', $response);
     }
 }

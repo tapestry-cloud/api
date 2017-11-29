@@ -1,0 +1,1 @@
+{"data":{"id":2,"name":"categories","links":[{"rel":"self","uri":"http:\/\/localhost:3000\/taxonomy\/2"},{"rel":"siblings","uri":"http:\/\/localhost:3000\/content-type\/2\/taxonomy"},{"rel":"content-type","uri":"http:\/\/localhost:3000\/content-type\/2"},{"rel":"classification","uri":"http:\/\/localhost:3000\/taxonomy\/2\/classifications"}],"meta":{"classification":0}}}

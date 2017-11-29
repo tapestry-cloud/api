@@ -26,6 +26,8 @@ class Routes extends AbstractServiceProvider implements BootableServiceProviderI
      * this interface. Provides ability for eager loading of Service Providers.
      *
      * @return void
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function boot()
     {
@@ -50,9 +52,18 @@ class Routes extends AbstractServiceProvider implements BootableServiceProviderI
         //
         // Taxonomy
         //
+        $app->get('/taxonomy', '\TapestryCloud\Api\Http\Controllers\Taxonomy::index');
         $app->get('/taxonomy/{taxonomy_id}', '\TapestryCloud\Api\Http\Controllers\Taxonomy::view');
         $app->get('/taxonomy/{taxonomy_id}/classifications', '\TapestryCloud\Api\Http\Controllers\Taxonomy::classifications');
         $app->get('/taxonomy/{taxonomy_id}/classification/{classification_id}/files', '\TapestryCloud\Api\Http\Controllers\Taxonomy::files');
+
+        //
+        // Classification
+        //
+        $app->get('/classifications', '\TapestryCloud\Api\Http\Controllers\Classification::index');
+        $app->get('/classification/{classification_id}', '\TapestryCloud\Api\Http\Controllers\Classification::view');
+        $app->get('/classification/{classification_id}/taxonomy', '\TapestryCloud\Api\Http\Controllers\Classification::taxonomy');
+        $app->get('/classification/{classification_id}/files', '\TapestryCloud\Api\Http\Controllers\Classification::files');
 
         //
         // Content Types

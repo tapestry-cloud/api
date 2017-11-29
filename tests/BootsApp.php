@@ -34,4 +34,9 @@ class BootsApp extends \PHPUnit_Framework_TestCase
         $this->app->run($request);
         return (string)$this->emitter->getResponse()->getBody();
     }
+
+    protected function assertResponseOk()
+    {
+        $this->assertEquals(200, $this->emitter->getResponse()->getStatusCode());
+    }
 }

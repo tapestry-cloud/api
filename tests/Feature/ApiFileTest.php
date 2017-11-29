@@ -19,6 +19,7 @@ class ApiFileTest extends BootsApp
             'REQUEST_URI' => '/files',
         ], [], [], [], []));
 
+        $this->assertResponseOk();
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/files.json', $response);
     }
 
@@ -33,6 +34,7 @@ class ApiFileTest extends BootsApp
             'REQUEST_URI' => '/file/1',
         ], [], [], [], []));
 
+        $this->assertResponseOk();
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-1.json', $response);
 
         $this->bootApp();
@@ -43,6 +45,7 @@ class ApiFileTest extends BootsApp
             'REQUEST_URI' => '/file/2',
         ], [], [], [], []));
 
+        $this->assertResponseOk();
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-2.json', $response);
 
         $this->bootApp();
@@ -53,6 +56,7 @@ class ApiFileTest extends BootsApp
             'REQUEST_URI' => '/file/3',
         ], [], [], [], []));
 
+        $this->assertResponseOk();
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-3.json', $response);
     }
 
@@ -70,6 +74,7 @@ class ApiFileTest extends BootsApp
             'include' => 'frontmatter'
         ], [], [], []));
 
+        $this->assertResponseOk();
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-1-include-frontmatter.json', $response);
 
         $this->bootApp();
@@ -83,6 +88,7 @@ class ApiFileTest extends BootsApp
             'include' => 'frontmatter'
         ], [], [], []));
 
+        $this->assertResponseOk();
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-2-include-frontmatter.json', $response);
 
         $this->bootApp();
@@ -96,6 +102,7 @@ class ApiFileTest extends BootsApp
             'include' => 'frontmatter'
         ], [], [], []));
 
+        $this->assertResponseOk();
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/file-3-include-frontmatter.json', $response);
     }
 }

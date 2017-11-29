@@ -13,8 +13,14 @@ class ApiClassificationTest extends BootsApp
      */
     public function testClassificationIndex()
     {
-        $this->assertTrue(false);
-        // @todo
+        $response = $this->runRequest(ServerRequestFactory::fromGlobals([
+            'HTTP_HOST' => 'example.com',
+            'REQUEST_METHOD' => 'GET',
+            'REQUEST_URI' => '/classifications',
+        ], [], [], [], []));
+
+        $this->assertResponseOk();
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/classifications.json', $response);
     }
 
     /**
@@ -22,8 +28,14 @@ class ApiClassificationTest extends BootsApp
      */
 	public function testClassificationView()
     {
-        $this->assertTrue(false);
-        // @todo
+        $response = $this->runRequest(ServerRequestFactory::fromGlobals([
+            'HTTP_HOST' => 'example.com',
+            'REQUEST_METHOD' => 'GET',
+            'REQUEST_URI' => '/classification/1',
+        ], [], [], [], []));
+
+        $this->assertResponseOk();
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/classification-1.json', $response);
     }
 
     /**
@@ -31,7 +43,28 @@ class ApiClassificationTest extends BootsApp
      */
     public function testClassificationTaxonomy()
     {
-        $this->assertTrue(false);
-        // @todo
+        $response = $this->runRequest(ServerRequestFactory::fromGlobals([
+            'HTTP_HOST' => 'example.com',
+            'REQUEST_METHOD' => 'GET',
+            'REQUEST_URI' => '/classification/1/taxonomy',
+        ], [], [], [], []));
+
+        $this->assertResponseOk();
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/classification-1-taxonomy.json', $response);
+    }
+
+    /**
+     * Test route: /classification/{id}/files
+     */
+    public function testClassificationFiles()
+    {
+        $response = $this->runRequest(ServerRequestFactory::fromGlobals([
+            'HTTP_HOST' => 'example.com',
+            'REQUEST_METHOD' => 'GET',
+            'REQUEST_URI' => '/classification/1/files',
+        ], [], [], [], []));
+
+        $this->assertResponseOk();
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../json/classification-1-files.json', $response);
     }
 }
