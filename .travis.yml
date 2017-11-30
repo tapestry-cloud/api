@@ -7,6 +7,7 @@ matrix:
     - php: 5.6
     - php: 7.0
     - php: 7.1
+      env: WITH_COVERAGE=true
     - php: nightly
   allow_failures:
     - php: nightly
@@ -17,7 +18,8 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - source .travis/travis.sh
+  - source .travis/travis.
+  - source .travis/test-reporter.sh
   - xdebug-disable
   - travis_retry composer self-update
 
@@ -26,3 +28,9 @@ install:
 
 script:
   - run-tests
+
+before_script:
+  - codeclimate-before-build
+
+after_success:
+  - codeclimate-after-build
