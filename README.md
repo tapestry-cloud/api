@@ -1,9 +1,10 @@
-# Tapestry Database Plugin
+<h1 align="center">Tapestry Database Plugin</h1>
+<p align="center"><em>Work in progress...</em></p>
 
-[![Build Status](https://travis-ci.org/tapestry-cloud/api.svg?branch=master)](https://travis-ci.org/tapestry-cloud/api)
-[![StyleCI](https://styleci.io/repos/111844198/shield?branch=master)](https://styleci.io/repos/111844198)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://php.net/)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.carloscuesta.me)
+<p align="center">
+  <a href="https://travis-ci.org/tapestry-cloud/api"><img src="https://travis-ci.org/tapestry-cloud/api.svg" alt="Build Status"></a>
+  <a href="https://codeclimate.com/github/tapestry-cloud/api/coverage"><img src="https://codeclimate.com/github/tapestry-cloud/api/badges/coverage.svg" alt="Test Coverage"></a>
+  <a href="LICENSE"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+</p>
 
 This is a work in progress, which once complete will allow you host a json api representing your projects last build status. This is useful for building admin tools.
