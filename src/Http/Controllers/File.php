@@ -71,5 +71,7 @@ class File extends Controller
         if (!$record = $this->entityManager->getRepository(\TapestryCloud\Database\Entities\File::class)->find($args['file_id'])) {
             return $response->withStatus(404);
         }
+
+
     }
 }
