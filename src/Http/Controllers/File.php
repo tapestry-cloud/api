@@ -64,4 +64,12 @@ class File extends Controller
 
         return $response;
     }
+
+    public function taxonomy(ServerRequestInterface $request, ResponseInterface $response, array $args = [])
+    {
+        /** @var \TapestryCloud\Database\Entities\File $record */
+        if (!$record = $this->entityManager->getRepository(\TapestryCloud\Database\Entities\File::class)->find($args['file_id'])) {
+            return $response->withStatus(404);
+        }
+    }
 }
