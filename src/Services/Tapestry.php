@@ -32,9 +32,12 @@ class Tapestry extends AbstractServiceProvider
         });
 
         $this->getContainer()->share(\Tapestry\Tapestry::class, function () {
+            /** @var \Tapestry\Entities\Configuration $configuration */
+            $configuration = $this->getContainer()->get(\Tapestry\Entities\Configuration::class);
+
             $definitions = new DefaultInputDefinition();
             $tapestry = new \Tapestry\Tapestry(new ArrayInput([
-                '--site-dir' => __DIR__, //@todo fix this
+                '--site-dir' => $configuration->get('site-dir'),
                 '--env'      => 'testing',
             ], $definitions));
 
