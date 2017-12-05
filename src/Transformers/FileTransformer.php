@@ -2,8 +2,12 @@
 
 namespace TapestryCloud\Api\Transformers;
 
+use Carbon\Carbon;
 use League\Fractal\Resource\Collection;
 use League\Fractal\TransformerAbstract;
+use Symfony\Component\Finder\SplFileInfo;
+use Tapestry\Entities\File as TapestryFile;
+use Tapestry\Entities\Project;
 use TapestryCloud\Database\Entities\File;
 
 class FileTransformer extends TransformerAbstract
@@ -17,8 +21,37 @@ class FileTransformer extends TransformerAbstract
         'frontmatter',
     ];
 
+    /**
+     * @var Project
+     */
+    private $project;
+
+    /**
+     * FileTransformer constructor.
+     * @param Project $project
+     */
+    public function __construct(Project $project)
+    {
+        $this->project = $project;
+    }
+
+    private function constructTapestryFile(File $model)
+    {
+        return new TapestryFile(
+            new SplFileInfo(
+                $this->project->sourceDirectory . DIRECTORY_SEPARATOR . $model->getPath() . DIRECTORY_SEPARATOR . $model->getFilename() . '.' . $model->getExt(),
+                '',''
+            ), []
+        );
+    }
+
     public function transform(File $model)
     {
+        $file = $this->constructTapestryFile($model);
+
+        /** @var \DateTime $date */
+        $date = $file->getData('date');
+
         return [
             'id'           => $model->getId(),
             'uid'          => $model->getUid(),
@@ -26,6 +59,14 @@ class FileTransformer extends TransformerAbstract
             'ext'          => $model->getExt(),
             'path'         => $model->getPath(),
             'lastModified' => $model->getLastModified(),
+            'date'         => $date->getTimestamp(),
+            'slug'         => $file->getData('slug'),
+            'draft'        => $file->getData('draft', false),
+            'pretty_permalink' => $file->getData('pretty_permalink', true),
+            // 'permalink'    => [
+            //     'template' => $file->getPermalink()->getTemplate(),
+            //     'compiled' => $file->getCompiledPermalink()
+            // ],
             'toCopy'       => $model->isToCopy(),
             'links'        => [
                 [
